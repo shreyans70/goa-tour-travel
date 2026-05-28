@@ -1,0 +1,107 @@
+@media (max-width: 768px) {
+  /* Navbar */
+  .hamburger {
+    display: block;
+  }
+  
+  .navbar-nav {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: var(--text-light);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 20px 0;
+  }
+  
+  .navbar-nav.active {
+    display: flex;
+  }
+  
+  .navbar-nav li {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .navbar-nav a {
+    display: block;
+    padding: 10px;
+  }
+  
+  /* Hero */
+  .hero h1 {
+    font-size: 2rem;
+  }
+  
+  /* Grids */
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Dashboards */
+  .dashboard-container {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+    padding: 10px;
+  }
+  
+  .main-content {
+    padding: 15px;
+  }
+  
+  /* Tables */
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+  
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  
+  tr { border: 1px solid #ccc; margin-bottom: 10px; }
+  
+  td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+    text-align: right;
+  }
+  
+  td:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: bold;
+    content: attr(data-label);
+  }
+  
+  /* Admin Modal Forms */
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .modal-content {
+    padding: 0;
+  }
+  
+  .modal-header-sticky, .modal-footer-sticky {
+    padding: 15px;
+  }
+  
+  .modal-body-scroll {
+    padding: 15px;
+  }
+}

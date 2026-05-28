@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goa Tour Travel</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">
+        Goa Tour Travel
+      </a>
+      
+      <div class="hamburger" id="hamburger">☰</div>
+      
+      <ul class="navbar-nav" id="nav-menu">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="packages.html">Packages</a></li>
+        <li><a href="places.html">Places</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        
+        <!-- Guest Links -->
+        <div id="guest-links" style="display: flex; gap: 20px;">
+          <li><a href="login.html" class="btn btn-primary">Login</a></li>
+          <li><a href="signup.html" class="btn btn-accent">Sign Up</a></li>
+        </div>
+        
+        <!-- Auth Links (Hidden by default) -->
+        <div id="auth-links" style="display: none; gap: 20px;">
+          <li><a href="#" id="dashboard-link" class="btn btn-primary">Dashboard</a></li>
+          <li><a href="#" id="logout-btn" class="btn btn-danger">Logout</a></li>
+        </div>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <h1 class="fade-in">Explore the Beauty of Goa</h1>
+      <p class="fade-in">Discover pristine beaches, rich heritage, and vibrant nightlife.</p>
+      <a href="packages.html" class="btn btn-accent fade-in">Explore Packages</a>
+    </div>
+  </section>
+
+  <!-- Best Deals Section -->
+  <section class="section container" id="best-deals">
+    <h2 class="section-title">Best Deals & Offers</h2>
+    <div class="grid-container" id="deals-grid">
+      <!-- Injected via JS -->
+    </div>
+  </section>
+
+  <!-- Why Book With Us Section -->
+  <section class="section container" style="background-color: var(--text-light); padding: 40px; border-radius: 8px; margin-top: 40px;">
+    <h2 class="section-title">Why Book With Us?</h2>
+    <div class="grid-container" style="text-align: center;">
+      <div class="card hover-zoom" style="padding: 20px; box-shadow: none;">
+        <h3 style="color: var(--primary-color);">Best Prices</h3>
+        <p>We offer the most competitive prices and exclusive discounts.</p>
+      </div>
+      <div class="card hover-zoom" style="padding: 20px; box-shadow: none;">
+        <h3 style="color: var(--primary-color);">24/7 Support</h3>
+        <p>Our travel experts are always ready to assist you during your trip.</p>
+      </div>
+      <div class="card hover-zoom" style="padding: 20px; box-shadow: none;">
+        <h3 style="color: var(--primary-color);">Custom Itineraries</h3>
+        <p>Get personalized day-wise plans suited exactly to your needs.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Packages Preview -->
+  <section class="section container" id="home-packages">
+    <h2 class="section-title">Popular Packages</h2>
+    <div class="grid-container" id="packages-grid">
+      <!-- Injected via JS -->
+    </div>
+    <div style="text-align: center; margin-top: 30px;">
+      <a href="packages.html" class="btn btn-primary">View All Packages</a>
+    </div>
+  </section>
+
+  <!-- Popular Places Preview -->
+  <section class="section container" id="home-places" style="background-color: var(--text-light); padding: 40px; border-radius: 8px;">
+    <h2 class="section-title">Top Places to Visit</h2>
+    <div class="grid-container" id="places-grid">
+      <!-- Injected via JS -->
+    </div>
+    <div style="text-align: center; margin-top: 30px;">
+      <a href="places.html" class="btn btn-primary">View All Places</a>
+    </div>
+  </section>
+
+  <!-- Travel Support Section -->
+  <section class="section container fade-in" style="text-align: center; margin-top: 40px; margin-bottom: 40px;">
+    <h2 class="section-title">Need Travel Support?</h2>
+    <p style="margin-bottom: 20px; font-size: 1.1rem;">Have questions about our packages or need a custom booking?</p>
+    <div style="display: flex; justify-content: center; gap: 20px;">
+      <a href="https://wa.me/918957144876?text=Hello%20Goa%20Tour%20Travel,%20I%20want%20to%20know%20more%20about%20your%20packages" target="_blank" class="btn btn-success" style="background-color: #25D366; color: white;">Chat on WhatsApp</a>
+      <a href="mailto:shreyansprajapati8957@gmail.com?subject=Goa%20Tour%20Inquiry&body=Hello%20Goa%20Tour%20Travel,%0A%0AI%20want%20to%20know%20more%20about%20your%20packages.%0A%0APlease%20share%20details." class="btn btn-primary">Email Query</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div>
+        <h3>Goa Tour Travel</h3>
+        <p>Your ultimate guide to exploring the beautiful state of Goa. We offer the best packages for families, couples, and adventurers.</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="packages.html">Packages</a></li>
+          <li><a href="places.html">Places</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact Info</h3>
+        <p>Email: <a href="mailto:shreyansprajapati8957@gmail.com" style="color: white; text-decoration: none;">shreyansprajapati8957@gmail.com</a></p>
+        <p>Phone: +91 8957144876</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Goa Tour Travel. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/home.js"></script>
+</body>
+</html>

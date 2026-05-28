@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery - Goa Tour Travel</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">Goa Tour Travel</a>
+      <div class="hamburger" id="hamburger">☰</div>
+      <ul class="navbar-nav" id="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="packages.html">Packages</a></li>
+        <li><a href="places.html">Places</a></li>
+        <li><a href="gallery.html" class="active">Gallery</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        
+        <div id="guest-links" style="display: flex; gap: 20px;">
+          <li><a href="login.html" class="btn btn-primary">Login</a></li>
+          <li><a href="signup.html" class="btn btn-accent">Sign Up</a></li>
+        </div>
+        
+        <div id="auth-links" style="display: none; gap: 20px;">
+          <li><a href="#" id="dashboard-link" class="btn btn-primary">Dashboard</a></li>
+          <li><a href="#" id="logout-btn" class="btn btn-danger">Logout</a></li>
+        </div>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="section container">
+    <h2 class="section-title">Photo Gallery</h2>
+    <div class="grid-container" id="gallery-grid">
+      <!-- Injected via JS -->
+    </div>
+  </section>
+
+  <!-- Read More Modal -->
+  <div id="readMoreModal" class="modal">
+    <div class="modal-content" style="max-width: 600px;">
+      <span class="close-modal" id="close-readmore-modal">&times;</span>
+      <h2 id="readmore-title" style="margin-bottom: 15px;"></h2>
+      <img id="readmore-img" src="" alt="Gallery Image" style="width: 100%; border-radius: 8px; margin-bottom: 15px;">
+      <div id="readmore-category" style="margin-bottom: 10px; font-weight: bold; color: #ff5722;"></div>
+      <p id="readmore-text" style="line-height: 1.6;"></p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 Goa Tour Travel. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/gallery.js"></script>
+</body>
+</html>

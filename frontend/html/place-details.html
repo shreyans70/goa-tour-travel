@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Place Details - Goa Tour Travel</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">Goa Tour Travel</a>
+      <div class="hamburger" id="hamburger">☰</div>
+      <ul class="navbar-nav" id="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="packages.html">Packages</a></li>
+        <li><a href="places.html" class="active">Places</a></li>
+        <div id="auth-links" style="display: none; gap: 20px;">
+          <li><a href="#" id="dashboard-link" class="btn btn-primary">Dashboard</a></li>
+          <li><a href="#" id="logout-btn" class="btn btn-danger">Logout</a></li>
+        </div>
+      </ul>
+    </div>
+  </nav>
+
+  <button onclick="window.history.back() || (window.location.href='index.html')" class="btn" style="background-color: #6c757d; color: white; margin-bottom: 20px;">&larr; Back</button>
+  <section class="section container" id="place-detail-content" style="padding-top: 0;">
+    <h2 class="section-title">Loading Place...</h2>
+  </section>
+
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      if (!requireLogin()) return;
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const placeId = urlParams.get('id');
+
+      if (!placeId) {
+        document.getElementById('place-detail-content').innerHTML = '<p>Place not found.</p>';
+        return;
+      }
+
+      try {
+        const place = await fetchAPI(`/places/${placeId}`);
+        const content = document.getElementById('place-detail-content');
+
+        content.innerHTML = `
+          <div style="display: flex; gap: 30px; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 300px;">
+              <img src="${place.image}" alt="${place.name}" style="width: 100%; border-radius: 8px;">
+            </div>
+            <div style="flex: 1; min-width: 300px;">
+              <span class="badge badge-green">${place.category}</span>
+              <h2 style="margin: 15px 0;">${place.name}</h2>
+              <p><strong>Location:</strong> ${place.location}</p>
+              <p><strong>Best Time to Visit:</strong> ${place.bestTime}</p>
+              <p><strong>Entry Fee:</strong> ${place.entryFee}</p>
+              
+              <h3 style="margin-top: 20px;">Short Description</h3>
+              <p style="margin: 10px 0; color: #555;">${place.description}</p>
+
+              ${place.about ? `
+              <h3 style="margin-top: 20px;">About / Full Details</h3>
+              <p style="margin: 10px 0;">${place.about.replace(/\n/g, '<br>')}</p>
+              ` : ''}
+              
+              <div style="margin-top: 30px;">
+                <a href="packages.html" class="btn btn-primary">Find Related Packages</a>
+              </div>
+            </div>
+          </div>
+        `;
+      } catch (error) {
+        document.getElementById('place-detail-content').innerHTML = '<p>Error loading place details.</p>';
+      }
+    });
+  </script>
+</body>
+</html>

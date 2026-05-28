@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Package - Goa Tour Travel</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">Goa Tour Travel</a>
+    </div>
+  </nav>
+
+  <div class="container auth-container">
+    <button onclick="window.history.back() || (window.location.href='index.html')" class="btn" style="background-color: #6c757d; color: white; margin-bottom: 20px;">&larr; Back</button>
+  <section class="section container" style="max-width: 600px; padding-top: 0;">
+      <h2>Book Your Package</h2>
+      <h4 id="pkg-title-display" style="text-align: center; color: var(--secondary-color); margin-bottom: 20px;"></h4>
+      
+      <form id="booking-form">
+        <input type="hidden" id="packageId">
+        
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="text" id="phone" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="travelDate">Travel Date</label>
+          <input type="date" id="travelDate" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="persons">Number of Persons</label>
+          <input type="number" id="persons" class="form-control" min="1" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Additional Message</label>
+          <textarea id="message" class="form-control" rows="3"></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-block">Submit Booking Request</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/booking.js"></script>
+</body>
+</html>

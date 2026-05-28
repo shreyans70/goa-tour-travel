@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Package Details - Goa Tour Travel</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">Goa Tour Travel</a>
+      <div class="hamburger" id="hamburger">☰</div>
+      <ul class="navbar-nav" id="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="packages.html" class="active">Packages</a></li>
+        <li><a href="places.html">Places</a></li>
+        <div id="auth-links" style="display: none; gap: 20px;">
+          <li><a href="#" id="dashboard-link" class="btn btn-primary">Dashboard</a></li>
+          <li><a href="#" id="logout-btn" class="btn btn-danger">Logout</a></li>
+        </div>
+      </ul>
+    </div>
+  </nav>
+
+  <button onclick="window.history.back() || (window.location.href='index.html')" class="btn" style="background-color: #6c757d; color: white; margin-bottom: 20px;">&larr; Back</button>
+  <section class="section container" id="package-detail-content" style="padding-top: 0;">
+    <h2 class="section-title">Loading Package...</h2>
+  </section>
+
+  <script src="../js/main.js"></script>
+  <script>
+    window.updateGallery = function(element, url) {
+      document.getElementById('main-gallery-img').src = url;
+      document.querySelectorAll('.gallery-thumb').forEach(el => el.classList.remove('active'));
+      element.classList.add('active');
+    };
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Protect this page
+      if (!requireLogin()) return;
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const pkgId = urlParams.get('id');
+
+      if (!pkgId) {
+        document.getElementById('package-detail-content').innerHTML = '<p>Package not found.</p>';
+        return;
+      }
+
+      try {
+        const pkg = await fetchAPI(`/packages/${pkgId}`);
+        const content = document.getElementById('package-detail-content');
+        
+        let itineraryHtml = '<div class="timeline">';
+        pkg.itinerary.forEach((item, index) => {
+          const lines = item.split('\n');
+          const dayTitle = lines[0];
+          const details = lines.slice(1).map(l => l.trim().startsWith('-') ? `<li>${l.replace('-', '').trim()}</li>` : `<p>${l}</p>`).join('');
+          
+          itineraryHtml += `
+            <div class="timeline-item fade-in" style="animation-delay: ${index * 0.1}s">
+              <div class="timeline-title">${dayTitle}</div>
+              <div class="timeline-content">
+                ${details ? (details.includes('<li>') ? `<ul>${details}</ul>` : details) : ''}
+              </div>
+            </div>
+          `;
+        });
+        itineraryHtml += '</div>';
+
+        const images = (pkg.images && pkg.images.length > 0) ? pkg.images : [pkg.image];
+        let galleryHtml = `<div class="package-gallery fade-in">
+          <img id="main-gallery-img" src="${images[0]}" alt="${pkg.title}" class="gallery-main">
+          <div class="gallery-thumbnails">`;
+        images.forEach((imgUrl, i) => {
+          galleryHtml += `<img src="${imgUrl}" class="gallery-thumb ${i===0?'active':''}" onclick="updateGallery(this, '${imgUrl}')">`;
+        });
+        galleryHtml += `</div></div>`;
+
+        const priceHtml = `
+          <div class="price-container mb-4">
+            ${pkg.offerTag ? `<span class="badge badge-yellow mb-2" style="display:inline-block; width: max-content;">${pkg.offerTag}</span>` : ''}
+            ${pkg.originalPrice ? `<span class="original-price" style="font-size: 1.2rem;">₹${pkg.originalPrice}</span>` : ''}
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span class="price" style="font-size: 2.5rem; color: var(--primary-color);">₹${pkg.price}</span>
+              ${pkg.discountPercent ? `<span class="discount-badge" style="font-size: 1.2rem; padding: 5px 10px;">${pkg.discountPercent}% OFF</span>` : ''}
+            </div>
+          </div>
+        `;
+
+        content.innerHTML = `
+          <div style="display: flex; gap: 40px; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 300px;">
+              ${galleryHtml}
+            </div>
+            <div style="flex: 1; min-width: 300px;" class="fade-in">
+              <span class="badge badge-blue">${pkg.category}</span>
+              <h2 style="margin: 15px 0; font-size: 2rem;">${pkg.title}</h2>
+              ${priceHtml}
+              <p><strong>Duration:</strong> ${pkg.duration}</p>
+              <p><strong>Location:</strong> ${pkg.location}</p>
+              <p style="margin: 20px 0; font-size: 1.1rem; line-height: 1.8;">${pkg.description}</p>
+              
+              <h3 style="margin-top: 30px; color: var(--primary-color);">Inclusions</h3>
+              <div style="display: flex; gap: 15px; margin-bottom: 30px;">
+                <span class="badge ${pkg.hotelIncluded ? 'badge-green' : 'badge-red'}">Hotel: ${pkg.hotelIncluded ? 'Yes' : 'No'}</span>
+                <span class="badge ${pkg.foodIncluded ? 'badge-green' : 'badge-red'}">Food: ${pkg.foodIncluded ? 'Yes' : 'No'}</span>
+                <span class="badge ${pkg.transportIncluded ? 'badge-green' : 'badge-red'}">Transport: ${pkg.transportIncluded ? 'Yes' : 'No'}</span>
+              </div>
+              
+              <h3 style="margin-top: 20px; margin-bottom: 20px; color: var(--primary-color);">Itinerary</h3>
+              ${itineraryHtml}
+              
+              <div style="margin-top: 40px; display: flex; gap: 15px; flex-wrap: wrap;">
+                <a href="booking.html?pkgId=${pkg._id}" class="btn btn-primary" style="font-size: 1.1rem; padding: 12px 25px;">Book Now</a>
+                <a href="#" id="whatsapp-btn" class="btn btn-success" style="background-color: #25D366; color: white; font-size: 1.1rem; padding: 12px 25px;">WhatsApp</a>
+                <a href="mailto:shreyansprajapati8957@gmail.com?subject=Inquiry about ${encodeURIComponent(pkg.title)}&body=Hello Goa Tour Travel,%0A%0AI want to know more about ${encodeURIComponent(pkg.title)}.%0APlease share details." class="btn btn-primary" style="background-color: #333; color: white; border: none; font-size: 1.1rem; padding: 12px 25px;">Email Query</a>
+              </div>
+            </div>
+          </div>
+        `;
+
+        // WhatsApp functionality
+        document.getElementById('whatsapp-btn').addEventListener('click', (e) => {
+          e.preventDefault();
+          const message = `Hello Goa Tour Travel,\nI want to discuss this package:\nPackage Name: ${pkg.title}\nPrice: ₹${pkg.price}\nPlease share more details.`;
+          const encodedMessage = encodeURIComponent(message);
+          window.open(`https://wa.me/918957144876?text=${encodedMessage}`, '_blank');
+        });
+
+      } catch (error) {
+        document.getElementById('package-detail-content').innerHTML = '<p>Error loading package details.</p>';
+      }
+    });
+  </script>
+</body>
+</html>

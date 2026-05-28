@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Goa Tour Travel</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">Goa Tour Travel</a>
+      <div class="hamburger" id="hamburger">☰</div>
+      <ul class="navbar-nav" id="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="packages.html">Packages</a></li>
+        <li><a href="places.html">Places</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+        
+        <div id="guest-links" style="display: flex; gap: 20px;">
+          <li><a href="login.html" class="btn btn-primary">Login</a></li>
+          <li><a href="signup.html" class="btn btn-accent">Sign Up</a></li>
+        </div>
+        
+        <div id="auth-links" style="display: none; gap: 20px;">
+          <li><a href="#" id="dashboard-link" class="btn btn-primary">Dashboard</a></li>
+          <li><a href="#" id="logout-btn" class="btn btn-danger">Logout</a></li>
+        </div>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="section container">
+    <h2 class="section-title">Contact Us</h2>
+    <p style="text-align: center; margin-bottom: 20px;">
+      Official Admin Email: <a href="mailto:shreyansprajapati8957@gmail.com">shreyansprajapati8957@gmail.com</a>
+    </p>
+    <div class="auth-form-container" style="margin: 0 auto; max-width: 600px;">
+      <form id="contact-form">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="text" id="phone" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" class="form-control" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 Goa Tour Travel. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const contactForm = document.getElementById('contact-form');
+      if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const data = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            message: document.getElementById('message').value
+          };
+
+          try {
+            await fetchAPI('/contact', {
+              method: 'POST',
+              body: JSON.stringify(data)
+            });
+            showAlert('Message sent successfully!', 'success');
+            contactForm.reset();
+          } catch (error) {
+            showAlert(error.message, 'danger');
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
