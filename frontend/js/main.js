@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = "https://goa-tour-travel-backend.onrender.com/api";
 
 // Utility: Show Alert
 const showAlert = (message, type = 'success') => {
